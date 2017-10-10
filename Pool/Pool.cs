@@ -1,69 +1,119 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Exodrifter.Anchor
 {
 	/// <summary>
-	/// A Pool is used to produce and manage many items of the same type.
+	/// Used to produce and manage many GameObjects and their associated active 
+	/// states.
 	/// </summary>
-	public class Pool<T>
+	[Serializable]
+	public class Pool
 	{
-		protected readonly IFactory<T> factory;
+		[SerializeField]
+		Factory factory = new Factory();
 
-		protected readonly LinkedList<T> pooled;
-		protected readonly LinkedList<T> spawned;
-
-		/// <summary>
-		/// Creates a new Pool with the specified Factory.
-		/// </summary>
-		/// <param name="factory">The factory to use.</param>
-		public Pool(IFactory<T> factory)
-		{
-			this.factory = factory;
-			this.pooled = new LinkedList<T>();
-			this.spawned = new LinkedList<T>();
-		}
+		[SerializeField, HideInInspector]
+		private List<GameObject> pooled = new List<GameObject>();
+		[SerializeField, HideInInspector]
+		private List<GameObject> spawned = new List<GameObject>();
 
 		/// <summary>
 		/// Spawns an item from the pool.
 		/// </summary>
-		public virtual T Spawn()
+		public GameObject Spawn()
 		{
-			T item;
+			CullDestroyed();
+
+			GameObject item;
 			if (pooled.Count > 0)
 			{
-				item = pooled.First.Value;
-				pooled.RemoveFirst();
+				item = pooled[pooled.Count - 1];
+				pooled.RemoveAt(pooled.Count - 1);
 			}
 			else
 			{
 				item = factory.Instantiate();
 			}
 
-			spawned.AddLast(item);
+			item.SetActive(true);
+			spawned.Add(item);
 			return item;
 		}
 
 		/// <summary>
-		/// Despawns an item in the pool.
+		/// Spawns a new GameObject and returns a component from it.
 		/// </summary>
-		/// <param name="item">The item to despawn.</param>
-		public virtual void Despawn(T item)
+		/// <typeparam name="T">
+		/// The type of the component to get.
+		/// </typeparam>
+		/// <param name="searchChildren">Whether or not to search children.</param>
+		/// <returns>The component on the spawned GameObject.</returns>
+		public T Spawn<T>(bool searchChildren = false)
 		{
+			return searchChildren
+				? Spawn().GetComponent<T>()
+				: Spawn().GetComponentInChildren<T>();
+		}
+
+		public void Despawn(GameObject item)
+		{
+			CullDestroyed();
+
 			if (spawned.Remove(item))
 			{
-				pooled.AddLast(item);
+				pooled.Add(item);
+
+				if (!Util.IsNull(item))
+				{
+					item.SetActive(false);
+				}
 			}
 		}
 
-		/// <summary>
-		/// Despawns all of the items in the pool.
-		/// </summary>
-		public virtual void DespawnAll()
+		public void DespawnAll()
 		{
-			while (spawned.Count > 0)
+			CullDestroyed();
+
+			for (int i = spawned.Count - 1; i >= 0; --i)
 			{
-				pooled.AddLast(spawned.First.Value);
-				spawned.RemoveFirst();
+				pooled.Add(spawned[i]);
+			}
+			spawned.Clear();
+
+			foreach (var item in pooled)
+			{
+				item.SetActive(false);
+			}
+		}
+
+	public void CullDespawned()
+	{
+		for (int i = pooled.Count - 1; i >= 0; --i)
+		{
+			var go = pooled[i];
+			UnityEngine.Object.Destroy(go);
+		}
+
+		pooled.Clear();
+	}
+
+		private void CullDestroyed()
+		{
+			for (int i = spawned.Count - 1; i >= 0; --i)
+			{
+				if (Util.IsNull(spawned[i]))
+				{
+					spawned.RemoveAt(i);
+				}
+			}
+			for (int i = pooled.Count - 1; i >= 0; --i)
+			{
+				if (Util.IsNull(pooled[i]))
+				{
+					pooled.RemoveAt(i);
+				}
 			}
 		}
 	}

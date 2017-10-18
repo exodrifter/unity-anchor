@@ -87,7 +87,8 @@ namespace Exodrifter.Anchor
 				source.gameObject.hideFlags = HideFlags.HideAndDontSave;
 			}
 
-			source.volume = Random.Range(0.8f, 1.0f);
+			var vol = bank.DefaultVolume;
+			source.volume = Random.Range(vol - 0.2f, vol);
 			source.pitch = Random.Range(0.9f, 1.1f);
 			source.clip = bank.GetRandomClip();
 			source.Play();

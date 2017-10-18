@@ -17,6 +17,16 @@ namespace Exodrifter.Anchor
 		[SerializeField, Tooltip("The max number of clips that can play at once.")]
 		private int maxVoices = 0;
 
+		/// <summary>
+		/// The default maximum volume of the Soundbank.
+		/// </summary>
+		public float DefaultVolume
+		{
+			get { return defaultVolume; }
+		}
+		[SerializeField, Range(0.2f, 1.0f)]
+		private float defaultVolume = 1f;
+
 		[SerializeField]
 		private List<AudioClip> clips;
 

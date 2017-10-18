@@ -18,10 +18,29 @@ namespace Exodrifter.Anchor
 		[SerializeField]
 		private Factory factory = new Factory();
 
+		public List<GameObject> Pooled
+		{
+			get { return new List<GameObject>(pooled); }
+		}
 		[SerializeField, HideInInspector]
 		private List<GameObject> pooled = new List<GameObject>();
+
+		public int PooledCount
+		{
+			get { return pooled.Count; }
+		}
+
+		public List<GameObject> Spawned
+		{
+			get { return new List<GameObject>(spawned); }
+		}
 		[SerializeField, HideInInspector]
 		private List<GameObject> spawned = new List<GameObject>();
+
+		public int SpawnedCount
+		{
+			get { return spawned.Count; }
+		}
 
 		/// <summary>
 		/// Spawns an item from the pool.
@@ -92,16 +111,26 @@ namespace Exodrifter.Anchor
 			}
 		}
 
-	public void CullDespawned()
-	{
-		for (int i = pooled.Count - 1; i >= 0; --i)
+		public void DespawnOldest()
 		{
-			var go = pooled[i];
-			UnityEngine.Object.Destroy(go);
+			CullDestroyed();
+
+			spawned[0].SetActive(false);
+
+			pooled.Add(spawned[0]);
+			spawned.RemoveAt(0);
 		}
 
-		pooled.Clear();
-	}
+		public void CullDespawned()
+		{
+			for (int i = pooled.Count - 1; i >= 0; --i)
+			{
+				var go = pooled[i];
+				UnityEngine.Object.Destroy(go);
+			}
+
+			pooled.Clear();
+		}
 
 		private void CullDestroyed()
 		{

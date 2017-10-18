@@ -7,6 +7,8 @@ namespace Exodrifter.Anchor
 	{
 		[SerializeField]
 		private Soundbank bank;
+		[SerializeField]
+		private bool onlyOne = false;
 
 		private Pool pool;
 
@@ -18,6 +20,11 @@ namespace Exodrifter.Anchor
 
 		public void PlayOneShot()
 		{
+			if (onlyOne)
+			{
+				StopAllCoroutines();
+				pool.DespawnAll();
+			}
 			var go = pool.Spawn();
 
 			var source = go.GetComponent<AudioSource>();

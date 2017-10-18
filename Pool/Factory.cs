@@ -6,8 +6,19 @@ namespace Exodrifter.Anchor
 	[Serializable]
 	public class Factory
 	{
+		public GameObject Prefab
+		{
+			get { return prefab; }
+			set { prefab = value; }
+		}
 		[SerializeField]
 		private GameObject prefab;
+
+		public Transform Parent
+		{
+			get { return parent; }
+			set { parent = value; }
+		}
 		[SerializeField]
 		private Transform parent;
 

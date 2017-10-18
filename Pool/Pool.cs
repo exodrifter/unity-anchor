@@ -11,8 +11,12 @@ namespace Exodrifter.Anchor
 	[Serializable]
 	public class Pool
 	{
+		public Factory Factory
+		{
+			get { return factory; }
+		}
 		[SerializeField]
-		Factory factory = new Factory();
+		private Factory factory = new Factory();
 
 		[SerializeField, HideInInspector]
 		private List<GameObject> pooled = new List<GameObject>();

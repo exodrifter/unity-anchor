@@ -4802,6 +4802,20 @@ namespace Exodrifter.Anchor.Editor
 
 		#endregion
 
+		#region EditorGUIUtility
+
+		public static float LineHeight
+		{
+			get { return EditorGUIUtility.singleLineHeight; }
+		}
+
+		public static float LineSpacing
+		{
+			get { return EditorGUIUtility.standardVerticalSpacing; }
+		}
+
+		#endregion
+
 		public static void Reset()
 		{
 			if (oldColor.HasValue) color = oldColor.Value;

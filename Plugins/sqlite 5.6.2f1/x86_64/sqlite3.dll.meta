@@ -15,15 +15,15 @@ PluginImporter:
       second:
         enabled: 0
         settings:
-          Exclude Android: 0
-          Exclude Editor: 0
+          Exclude Android: 1
+          Exclude Editor: 1
           Exclude Linux: 0
           Exclude Linux64: 0
           Exclude LinuxUniversal: 0
           Exclude OSXIntel: 0
           Exclude OSXIntel64: 0
           Exclude OSXUniversal: 0
-          Exclude WebGL: 0
+          Exclude WebGL: 1
           Exclude Win: 1
           Exclude Win64: 0
     data:
@@ -38,20 +38,20 @@ PluginImporter:
       first:
         Android: Android
       second:
-        enabled: 1
+        enabled: 0
         settings:
           CPU: ARMv7
     data:
       first:
         Any: 
       second:
-        enabled: 1
+        enabled: 0
         settings: {}
     data:
       first:
         Editor: Editor
       second:
-        enabled: 1
+        enabled: 0
         settings:
           DefaultValueInitialized: true
     data:
@@ -128,7 +128,7 @@ PluginImporter:
       first:
         WebGL: WebGL
       second:
-        enabled: 1
+        enabled: 0
         settings: {}
   userData: 
   assetBundleName: 

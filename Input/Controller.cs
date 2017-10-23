@@ -1,101 +1,117 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-
-namespace Exodrifter.Anchor
+﻿namespace Exodrifter.Anchor
 {
-	/// <summary>
-	/// Converts controller inputs into platform-independent inputs
-	/// </summary>
 	public static class Controller
 	{
-		/// <summary>
-		/// Returns true if the button is held down.
-		/// </summary>
-		/// <param name="code">The button code to check.</param>
-		/// <returns>True if the button is held down</returns>
 		public static bool GetButton
-			(ButtonCode code, ControllerCode controller = ControllerCode.Any)
+			(ButtonCode code, PlayerCode player = PlayerCode.Any)
 		{
-			var keys = Convert(code, controller);
-			foreach (var k in keys)
-			{
-				if (Input.GetKey(k))
-				{
-					return true;
-				}
-			}
-			return false;
+			return GetButtonInternal(code, player,
+				ButtonState.Down, ButtonState.On);
 		}
 
-		/// <summary>
-		/// Returns true if the button was pressed this frame.
-		/// </summary>
-		/// <param name="code">The button code to check.</param>
-		/// <returns>True if the button is held down</returns>
 		public static bool GetButtonDown
-			(ButtonCode code, ControllerCode controller = ControllerCode.Any)
+			(ButtonCode code, PlayerCode player = PlayerCode.Any)
 		{
-			var keys = Convert(code, controller);
-			foreach (var k in keys)
-			{
-				if (Input.GetKeyDown(k))
-				{
-					return true;
-				}
-			}
-			return false;
+			return GetButtonInternal(code, player,
+				ButtonState.Down);
 		}
 
-		/// <summary>
-		/// Returns true if the button was released this frame.
-		/// </summary>
-		/// <param name="code">The button code to check.</param>
-		/// <returns>True if the button is held down</returns>
 		public static bool GetButtonUp
-			(ButtonCode code, ControllerCode controller = ControllerCode.Any)
+			(ButtonCode code, PlayerCode player = PlayerCode.Any)
 		{
-			var keys = Convert(code, controller);
-			foreach (var k in keys)
-			{
-				if (Input.GetKeyUp(k))
-				{
-					return true;
-				}
-			}
-			return false;
+			return GetButtonInternal(code, player,
+				ButtonState.Up);
 		}
 
-		#region Conversion
-
-		private static List<KeyCode> Convert(ButtonCode code, ControllerCode controller)
+		public static float GetAxis(AxisCode code, PlayerCode player = PlayerCode.Any)
 		{
-			var codes = new List<KeyCode>();
-
-			var names = Input.GetJoystickNames();
-			for (int i = 0; i < names.Length; ++i)
-			{
-				if (controller == 0 || (int)controller == (i + 1))
-				{
-					if (names[i].Contains("XBOX 360"))
-					{
-						codes.Add(Get(Xbox360.Convert(code), controller));
-					}
-					else
-					{
-						Debug.LogWarning(string.Format(
-							"Unknown controller name \"{0}\"",
-							names[i]
-						));
-					}
-				}
-			}
-			return codes;
+			return GetAxisInternal(code, player);
 		}
 
-		private static KeyCode Get(int button, ControllerCode controller)
+		#region Utility
+
+		private static float GetAxisInternal(AxisCode code, PlayerCode player)
 		{
-			button = (int)KeyCode.JoystickButton0 + button;
-			return (KeyCode)(button + (int)controller * 10);
+			var states = ControllerHelper.Instance.States;
+			if (player == PlayerCode.Any)
+			{
+				float value = 0;
+				int count = 0;
+				for (int i = 0; i < states.Length; ++i)
+				{
+					if (!Connected(i))
+					{
+						continue;
+					}
+
+					count++;
+					value += states[i].axis[code];
+				}
+
+				if (count == 0)
+				{
+					return 0;
+				}
+				return value / count;
+			}
+			else
+			{
+				if (!Connected((int)player))
+				{
+					return 0;
+				}
+
+				return states[(int)player].axis[code];
+			}
+		}
+
+		private static bool GetButtonInternal
+			(ButtonCode code, PlayerCode player, params ButtonState[] wanted)
+		{
+			var states = ControllerHelper.Instance.States;
+
+			if (player == PlayerCode.Any)
+			{
+				for (int i = 0; i < states.Length; ++i)
+				{
+					if (!Connected(i))
+					{
+						continue;
+					}
+
+					var state = states[i];
+					foreach (var want in wanted)
+					{
+						if (state.buttons[code] == want)
+						{
+							return true;
+						}
+					}
+				}
+				return false;
+			}
+			else
+			{
+				if (!Connected((int)player))
+				{
+					return false;
+				}
+
+				var state = states[(int)player];
+				foreach (var want in wanted)
+				{
+					if (state.buttons[code] == want)
+					{
+						return true;
+					}
+				}
+				return false;
+			}
+		}
+
+		private static bool Connected(int player)
+		{
+			return ControllerHelper.Instance.States[player].connected;
 		}
 
 		#endregion

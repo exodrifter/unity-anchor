@@ -35,5 +35,44 @@
 				return hash;
 			}
 		}
+
+		public static string GetRot13(string str)
+		{
+			if (string.IsNullOrEmpty(str))
+			{
+				return str;
+			}
+
+			char[] arr = str.ToCharArray();
+			for (int i = 0; i < arr.Length; i++)
+			{
+				int ch = arr[i];
+
+				if (ch >= 'a' && ch <= 'z')
+				{
+					if (ch > 'm')
+					{
+						ch -= 13;
+					}
+					else
+					{
+						ch += 13;
+					}
+				}
+				else if (ch >= 'A' && ch <= 'Z')
+				{
+					if (ch > 'M')
+					{
+						ch -= 13;
+					}
+					else
+					{
+						ch += 13;
+					}
+				}
+				arr[i] = (char)ch;
+			}
+			return new string(arr);
+		}
 	}
 }

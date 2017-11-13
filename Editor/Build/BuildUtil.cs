@@ -122,6 +122,8 @@ namespace Exodrifter.Anchor.Editor
 			{
 				default:
 					throw new ArgumentException("Unknown target " + target);
+				case BuildTarget.Android:
+					return Path.ChangeExtension(exeName, "apk");
 				case BuildTarget.StandaloneWindows:
 				case BuildTarget.StandaloneWindows64:
 					return Path.ChangeExtension(exeName, "exe");

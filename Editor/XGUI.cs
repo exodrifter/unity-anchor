@@ -1278,54 +1278,34 @@ namespace Exodrifter.Anchor.Editor
 			EditorGUI.EndProperty();
 		}
 
-		public static Enum EnumMaskField(Rect position, string label, Enum enumValue, GUIStyle style)
+		public static Enum EnumFlagsField(Rect position, string label, Enum enumValue, GUIStyle style)
 		{
-			return EditorGUI.EnumMaskField(position, label, enumValue, style);
+			return EditorGUI.EnumFlagsField(position, label, enumValue, style);
 		}
 
-		public static Enum EnumMaskField(Rect position, GUIContent label, Enum enumValue, GUIStyle style)
+		public static Enum EnumFlagsField(Rect position, GUIContent label, Enum enumValue, GUIStyle style)
 		{
-			return EditorGUI.EnumMaskField(position, label, enumValue, style);
+			return EditorGUI.EnumFlagsField(position, label, enumValue, style);
 		}
 
-		public static Enum EnumMaskField(Rect position, Enum enumValue)
+		public static Enum EnumFlagsField(Rect position, Enum enumValue)
 		{
-			return EditorGUI.EnumMaskField(position, enumValue);
+			return EditorGUI.EnumFlagsField(position, enumValue);
 		}
 
-		public static Enum EnumMaskField(Rect position, GUIContent label, Enum enumValue)
+		public static Enum EnumFlagsField(Rect position, GUIContent label, Enum enumValue)
 		{
-			return EditorGUI.EnumMaskField(position, label, enumValue);
+			return EditorGUI.EnumFlagsField(position, label, enumValue);
 		}
 
-		public static Enum EnumMaskField(Rect position, string label, Enum enumValue)
+		public static Enum EnumFlagsField(Rect position, string label, Enum enumValue)
 		{
-			return EditorGUI.EnumMaskField(position, label, enumValue);
+			return EditorGUI.EnumFlagsField(position, label, enumValue);
 		}
 
-		public static Enum EnumMaskField(Rect position, Enum enumValue, GUIStyle style)
+		public static Enum EnumFlagsField(Rect position, Enum enumValue, GUIStyle style)
 		{
-			return EditorGUI.EnumMaskField(position, enumValue, style);
-		}
-
-		public static Enum EnumMaskPopup(Rect position, GUIContent label, Enum selected, GUIStyle style)
-		{
-			return EditorGUI.EnumMaskPopup(position, label, selected, style);
-		}
-
-		public static Enum EnumMaskPopup(Rect position, GUIContent label, Enum selected)
-		{
-			return EditorGUI.EnumMaskPopup(position, label, selected);
-		}
-
-		public static Enum EnumMaskPopup(Rect position, string label, Enum selected, GUIStyle style)
-		{
-			return EditorGUI.EnumMaskPopup(position, label, selected, style);
-		}
-
-		public static Enum EnumMaskPopup(Rect position, string label, Enum selected)
-		{
-			return EditorGUI.EnumMaskPopup(position, label, selected);
+			return EditorGUI.EnumFlagsField(position, enumValue, style);
 		}
 
 		public static Enum EnumPopup(Rect position, GUIContent label, Enum selected, GUIStyle style)
@@ -3271,104 +3251,64 @@ namespace Exodrifter.Anchor.Editor
 			EditorGUILayout.EndVertical();
 		}
 
-		public static Enum EnumMaskField(string label, Enum enumValue, params GUILayoutOption[] options)
+		public static Enum EnumFlagsField(string label, Enum enumValue, params GUILayoutOption[] options)
 		{
-			return EditorGUILayout.EnumMaskField(label, enumValue, options);
+			return EditorGUILayout.EnumFlagsField(label, enumValue, options);
 		}
 
-		public static void EnumMaskField(string label, ref Enum enumValue, params GUILayoutOption[] options)
+		public static void EnumFlagsField(string label, ref Enum enumValue, params GUILayoutOption[] options)
 		{
-			enumValue = EditorGUILayout.EnumMaskField(label, enumValue, options);
+			enumValue = EditorGUILayout.EnumFlagsField(label, enumValue, options);
 		}
 
-		public static Enum EnumMaskField(GUIContent label, Enum enumValue, params GUILayoutOption[] options)
+		public static Enum EnumFlagsField(GUIContent label, Enum enumValue, params GUILayoutOption[] options)
 		{
-			return EditorGUILayout.EnumMaskField(label, enumValue, options);
+			return EditorGUILayout.EnumFlagsField(label, enumValue, options);
 		}
 
-		public static void EnumMaskField(GUIContent label, ref Enum enumValue, params GUILayoutOption[] options)
+		public static void EnumFlagsField(GUIContent label, ref Enum enumValue, params GUILayoutOption[] options)
 		{
-			enumValue = EditorGUILayout.EnumMaskField(label, enumValue, options);
+			enumValue = EditorGUILayout.EnumFlagsField(label, enumValue, options);
 		}
 
-		public static Enum EnumMaskField(string label, Enum enumValue, GUIStyle style, params GUILayoutOption[] options)
+		public static Enum EnumFlagsField(string label, Enum enumValue, GUIStyle style, params GUILayoutOption[] options)
 		{
-			return EditorGUILayout.EnumMaskField(label, enumValue, style, options);
+			return EditorGUILayout.EnumFlagsField(label, enumValue, style, options);
 		}
 
-		public static void EnumMaskField(string label, ref Enum enumValue, GUIStyle style, params GUILayoutOption[] options)
+		public static void EnumFlagsField(string label, ref Enum enumValue, GUIStyle style, params GUILayoutOption[] options)
 		{
-			enumValue = EditorGUILayout.EnumMaskField(label, enumValue, style, options);
+			enumValue = EditorGUILayout.EnumFlagsField(label, enumValue, style, options);
 		}
 
-		public static Enum EnumMaskField(Enum enumValue, GUIStyle style, params GUILayoutOption[] options)
+		public static Enum EnumFlagsField(Enum enumValue, GUIStyle style, params GUILayoutOption[] options)
 		{
-			return EditorGUILayout.EnumMaskField(enumValue, style, options);
+			return EditorGUILayout.EnumFlagsField(enumValue, style, options);
 		}
 
-		public static void EnumMaskField(ref Enum enumValue, GUIStyle style, params GUILayoutOption[] options)
+		public static void EnumFlagsField(ref Enum enumValue, GUIStyle style, params GUILayoutOption[] options)
 		{
-			enumValue = EditorGUILayout.EnumMaskField(enumValue, style, options);
+			enumValue = EditorGUILayout.EnumFlagsField(enumValue, style, options);
 		}
 
-		public static Enum EnumMaskField(Enum enumValue, params GUILayoutOption[] options)
+		public static Enum EnumFlagsField(Enum enumValue, params GUILayoutOption[] options)
 		{
-			return EditorGUILayout.EnumMaskField(enumValue, options);
+			return EditorGUILayout.EnumFlagsField(enumValue, options);
 		}
 
-		public static void EnumMaskField(ref Enum enumValue, params GUILayoutOption[] options)
+		public static void EnumFlagsField(ref Enum enumValue, params GUILayoutOption[] options)
 		{
-			enumValue = EditorGUILayout.EnumMaskField(enumValue, options);
+			enumValue = EditorGUILayout.EnumFlagsField(enumValue, options);
 		}
 
-		public static Enum EnumMaskField(GUIContent label, Enum enumValue, GUIStyle style, params GUILayoutOption[] options)
+		public static Enum EnumFlagsField(GUIContent label, Enum enumValue, GUIStyle style, params GUILayoutOption[] options)
 		{
-			return EditorGUILayout.EnumMaskField(label, enumValue, style, options);
+			return EditorGUILayout.EnumFlagsField(label, enumValue, style, options);
 		}
 
-		public static void EnumMaskField(GUIContent label, ref Enum enumValue, GUIStyle style, params GUILayoutOption[] options)
+		public static void EnumFlagsField(GUIContent label, ref Enum enumValue, GUIStyle style, params GUILayoutOption[] options)
 		{
-			enumValue = EditorGUILayout.EnumMaskField(label, enumValue, style, options);
-		}
-
-		public static Enum EnumMaskPopup(GUIContent label, Enum selected, params GUILayoutOption[] options)
-		{
-			return EditorGUILayout.EnumMaskPopup(label, selected, options);
-		}
-
-		public static void EnumMaskPopup(GUIContent label, ref Enum selected, params GUILayoutOption[] options)
-		{
-			selected = EditorGUILayout.EnumMaskPopup(label, selected, options);
-		}
-
-		public static Enum EnumMaskPopup(string label, Enum selected, params GUILayoutOption[] options)
-		{
-			return EditorGUILayout.EnumMaskPopup(label, selected, options);
-		}
-
-		public static void EnumMaskPopup(string label, ref Enum selected, params GUILayoutOption[] options)
-		{
-			selected = EditorGUILayout.EnumMaskPopup(label, selected, options);
-		}
-
-		public static Enum EnumMaskPopup(string label, Enum selected, GUIStyle style, params GUILayoutOption[] options)
-		{
-			return EditorGUILayout.EnumMaskPopup(label, selected, style, options);
-		}
-
-		public static void EnumMaskPopup(string label, ref Enum selected, GUIStyle style, params GUILayoutOption[] options)
-		{
-			selected = EditorGUILayout.EnumMaskPopup(label, selected, style, options);
-		}
-
-		public static Enum EnumMaskPopup(GUIContent label, Enum selected, GUIStyle style, params GUILayoutOption[] options)
-		{
-			return EditorGUILayout.EnumMaskPopup(label, selected, style, options);
-		}
-
-		public static void EnumMaskPopup(GUIContent label, ref Enum selected, GUIStyle style, params GUILayoutOption[] options)
-		{
-			selected = EditorGUILayout.EnumMaskPopup(label, selected, style, options);
+			enumValue = EditorGUILayout.EnumFlagsField(label, enumValue, style, options);
 		}
 
 		public static Enum EnumPopup(string label, Enum selected, params GUILayoutOption[] options)

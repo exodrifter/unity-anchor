@@ -127,9 +127,7 @@ namespace Exodrifter.Anchor.Editor
 				case BuildTarget.StandaloneWindows:
 				case BuildTarget.StandaloneWindows64:
 					return Path.ChangeExtension(exeName, "exe");
-				case BuildTarget.StandaloneOSXIntel:
-				case BuildTarget.StandaloneOSXIntel64:
-				case BuildTarget.StandaloneOSXUniversal:
+				case BuildTarget.StandaloneOSX:
 					return Path.ChangeExtension(exeName, "app");
 				case BuildTarget.StandaloneLinux:
 					return Path.ChangeExtension(exeName, "x86");
@@ -142,7 +140,7 @@ namespace Exodrifter.Anchor.Editor
 
 		#endregion
 
-		#region Settings
+#region Settings
 
 		public static List<BuildConfig> LoadSettings()
 		{
@@ -187,6 +185,6 @@ namespace Exodrifter.Anchor.Editor
 			}
 		}
 
-		#endregion
+#endregion
 	}
 }

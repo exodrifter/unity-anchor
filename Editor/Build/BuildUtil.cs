@@ -129,12 +129,8 @@ namespace Exodrifter.Anchor.Editor
 					return Path.ChangeExtension(exeName, "exe");
 				case BuildTarget.StandaloneOSX:
 					return Path.ChangeExtension(exeName, "app");
-				case BuildTarget.StandaloneLinux:
-					return Path.ChangeExtension(exeName, "x86");
 				case BuildTarget.StandaloneLinux64:
 					return Path.ChangeExtension(exeName, "x86_64");
-				case BuildTarget.StandaloneLinuxUniversal:
-					return exeName;
 			}
 		}
 

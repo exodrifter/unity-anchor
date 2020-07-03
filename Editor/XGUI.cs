@@ -928,9 +928,9 @@ namespace Exodrifter.Anchor.Editor
 			return EditorGUI.BoundsField(position, label, value);
 		}
 
-		public static Color ColorField(Rect position, GUIContent label, Color value, bool showEyedropper, bool showAlpha, bool hdr, ColorPickerHDRConfig hdrConfig)
+		public static Color ColorField(Rect position, GUIContent label, Color value, bool showEyedropper, bool showAlpha, bool hdr)
 		{
-			return EditorGUI.ColorField(position, label, value, showEyedropper, showAlpha, hdr, hdrConfig);
+			return EditorGUI.ColorField(position, label, value, showEyedropper, showAlpha, hdr);
 		}
 
 		public static Color ColorField(Rect position, Color value)
@@ -2806,14 +2806,14 @@ namespace Exodrifter.Anchor.Editor
 			value = EditorGUILayout.ColorField(label, value, options);
 		}
 
-		public static Color ColorField(GUIContent label, Color value, bool showEyedropper, bool showAlpha, bool hdr, ColorPickerHDRConfig hdrConfig, params GUILayoutOption[] options)
+		public static Color ColorField(GUIContent label, Color value, bool showEyedropper, bool showAlpha, bool hdr, params GUILayoutOption[] options)
 		{
-			return EditorGUILayout.ColorField(label, value, showEyedropper, showAlpha, hdr, hdrConfig, options);
+			return EditorGUILayout.ColorField(label, value, showEyedropper, showAlpha, hdr, options);
 		}
 
-		public static void ColorField(GUIContent label, ref Color value, bool showEyedropper, bool showAlpha, bool hdr, ColorPickerHDRConfig hdrConfig, params GUILayoutOption[] options)
+		public static void ColorField(GUIContent label, ref Color value, bool showEyedropper, bool showAlpha, bool hdr, params GUILayoutOption[] options)
 		{
-			value = EditorGUILayout.ColorField(label, value, showEyedropper, showAlpha, hdr, hdrConfig, options);
+			value = EditorGUILayout.ColorField(label, value, showEyedropper, showAlpha, hdr, options);
 		}
 
 		public static AnimationCurve CurveField(GUIContent label, AnimationCurve value, params GUILayoutOption[] options)

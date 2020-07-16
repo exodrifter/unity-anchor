@@ -10,7 +10,6 @@ namespace Exodrifter.Anchor.Editor
 		public string exeName;
 		public bool defaultBuild;
 		public BuildTarget target;
-		public string[] scenes;
 		public BuildOptions options;
 	}
 }

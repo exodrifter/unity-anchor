@@ -11,7 +11,6 @@ namespace Exodrifter.Anchor.Editor
 	{
 		private static List<BuildConfig> configs = new List<BuildConfig>();
 		private ReorderableList list;
-		private ReorderableList sceneList;
 
 		private Vector2 leftPos;
 		private Vector2 rightPos;
@@ -59,7 +58,6 @@ namespace Exodrifter.Anchor.Editor
 				{
 					var config = new BuildConfig();
 					config.folder = "New Build Config";
-					config.scenes = new string[0];
 					list.list.Add(config);
 				};
 			}
@@ -108,18 +106,6 @@ namespace Exodrifter.Anchor.Editor
 			if (XGUI.changed)
 			{
 				configs = (List<BuildConfig>)list.list;
-
-				if (sceneList != null)
-				{
-					var sceneAssets = (List<SceneAsset>)sceneList.list;
-					var scenePaths = new List<string>();
-					foreach (var scene in sceneAssets)
-					{
-						scenePaths.Add(AssetDatabase.GetAssetPath(scene));
-					}
-					configs[list.index].scenes = scenePaths.ToArray();
-				}
-
 				BuildUtil.SaveSettings(configs);
 			}
 
@@ -151,43 +137,11 @@ namespace Exodrifter.Anchor.Editor
 			XGUI.Toggle("Default Build", ref config.defaultBuild);
 			config.target = (BuildTarget)XGUI.EnumPopup("Target Platform", config.target);
 
-			if (sceneList == null)
-			{
-				sceneList = new ReorderableList(configs, typeof(SceneAsset));
-				sceneList.drawHeaderCallback += (rect) =>
-				{
-					XGUI.Label(rect, "Scene Assets");
-				};
-				sceneList.drawElementCallback += DrawSceneListElement;
-				sceneList.onAddCallback += AddSceneListElement;
-			}
-			var sceneAssets = new List<SceneAsset>();
-			foreach (var scene in config.scenes)
-			{
-				sceneAssets.Add(AssetDatabase.LoadAssetAtPath<SceneAsset>(scene));
-			}
-			sceneList.list = sceneAssets;
-			sceneList.DoLayoutList();
-
 			options = XGUI.Foldout(options, "Build Options");
 			if (options)
 			{
 				DrawBuildOptions(config);
 			}
-		}
-
-		private void DrawSceneListElement(Rect rect, int index, bool active, bool focused)
-		{
-			rect.y += 2;
-			rect.height = EditorGUIUtility.singleLineHeight;
-			var asset = (SceneAsset)sceneList.list[index];
-			asset = XGUI.ObjectField<SceneAsset>(rect, asset, false);
-			sceneList.list[index] = asset;
-		}
-
-		private void AddSceneListElement(ReorderableList list)
-		{
-			list.list.Add(null);
 		}
 
 		private void DrawBuildOptions(BuildConfig config)

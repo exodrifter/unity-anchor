@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
@@ -70,7 +71,7 @@ namespace Exodrifter.Anchor.Editor
 			var path = Path.Combine(GetBuildPath(), config.folder);
 			var options = new BuildPlayerOptions();
 			options.target = config.target;
-			options.scenes = config.scenes;
+			options.scenes = EditorBuildSettings.scenes.Select(x => x.path).ToArray();
 			options.locationPathName = Path.Combine(path,
 				GetExeFilename(config.exeName, config.target));
 

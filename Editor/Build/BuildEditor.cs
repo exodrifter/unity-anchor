@@ -146,16 +146,18 @@ namespace Exodrifter.Anchor.Editor
 
 		private void DrawBuildOptions(BuildConfig config)
 		{
-			DrawBuildOption(config, BuildOptions.Development, "Development Build");
+			DrawBuildOption(config, BuildOptions.Development, "Development");
 			DrawBuildInfo("Build a development version of the player.");
 			DrawBuildOption(config, BuildOptions.AutoRunPlayer, "Auto Run Player");
 			DrawBuildInfo("Run the built player.");
 			DrawBuildOption(config, BuildOptions.ShowBuiltPlayer, "Show Built Player");
 			DrawBuildInfo("Show the built player.");
 			DrawBuildOption(config, BuildOptions.BuildAdditionalStreamedScenes, "Build Additional Streamed Scenes");
-			DrawBuildInfo("Build a compressed asset bundle that contains streamed scenes loadable with the WWW class.");
-			DrawBuildOption(config, BuildOptions.AcceptExternalModificationsToPlayer, "Accept External Modifications to Player");
+			DrawBuildInfo("Build a compressed asset bundle that contains streamed Scenes loadable with the UnityWebRequest class.");
+			DrawBuildOption(config, BuildOptions.AcceptExternalModificationsToPlayer, "Accept External Modifications To Player");
 			DrawBuildInfo("Used when building Xcode (iOS) or Eclipse (Android) projects.");
+			DrawBuildOption(config, BuildOptions.InstallInBuildFolder, "Install In Build Folder");
+			DrawBuildInfo("Copy UnityObject.js alongside Web Player so it wouldn't have to be downloaded from internet.");
 			DrawBuildOption(config, BuildOptions.ConnectWithProfiler, "Connect With Profiler");
 			DrawBuildInfo("Start the player with a connection to the profiler in the editor.");
 			DrawBuildOption(config, BuildOptions.AllowDebugging, "Allow Debugging");
@@ -164,18 +166,34 @@ namespace Exodrifter.Anchor.Editor
 			DrawBuildInfo("Symlink runtime libraries when generating iOS Xcode project. (Faster iteration time).");
 			DrawBuildOption(config, BuildOptions.UncompressedAssetBundle, "Uncompressed Asset Bundle");
 			DrawBuildInfo("Don't compress the data when creating the asset bundle.");
-			DrawBuildOption(config, BuildOptions.ConnectToHost, "Connect to Host");
+			DrawBuildOption(config, BuildOptions.ConnectToHost, "Connect To Host");
 			DrawBuildInfo("Sets the Player to connect to the Editor.");
 			DrawBuildOption(config, BuildOptions.EnableHeadlessMode, "Enable Headless Mode");
-			DrawBuildInfo("Build headless Linux standalone.");
+			DrawBuildInfo("Options for building the standalone player in headless mode.");
 			DrawBuildOption(config, BuildOptions.BuildScriptsOnly, "Build Scripts Only");
-			DrawBuildInfo("Build only the scripts of a project.");
+			DrawBuildInfo("Only build the scripts in a Project.");
+			DrawBuildOption(config, BuildOptions.PatchPackage, "Patch Package");
+			DrawBuildInfo("Patch a Development app package rather than completely rebuilding it.");
 			DrawBuildOption(config, BuildOptions.ForceEnableAssertions, "Force Enable Assertions");
 			DrawBuildInfo("Include assertions in the build. By default, the assertions are only included in development builds.");
-			DrawBuildOption(config, BuildOptions.CompressWithLz4, "Compress with Lz4");
-			DrawBuildInfo("Use chunk-based Lz4 compression when building the Player.");
+			DrawBuildOption(config, BuildOptions.CompressWithLz4, "Compress With Lz4");
+			DrawBuildInfo("Use chunk-based LZ4 compression when building the Player.");
+			DrawBuildOption(config, BuildOptions.CompressWithLz4HC, "Compress With Lz4HC");
+			DrawBuildInfo("Use chunk-based LZ4 high-compression when building the Player.");
+			DrawBuildOption(config, BuildOptions.ComputeCRC, "Compute CRC");
+			DrawBuildInfo("Request that the CRC of the built output be computed and included in the build report.");
 			DrawBuildOption(config, BuildOptions.StrictMode, "Strict Mode");
 			DrawBuildInfo("Do not allow the build to succeed if any errors are reporting during it.");
+			DrawBuildOption(config, BuildOptions.IncludeTestAssemblies, "Include Test Assemblies");
+			DrawBuildInfo("Build will include Assemblies for testing.");
+			DrawBuildOption(config, BuildOptions.NoUniqueIdentifier, "No Unique Identifier");
+			DrawBuildInfo("Will force the build GUID to all zeros.");
+			DrawBuildOption(config, BuildOptions.WaitForPlayerConnection, "Wait For Player Connection");
+			DrawBuildInfo("Sets the Player to wait for player connection on player start.");
+			DrawBuildOption(config, BuildOptions.EnableCodeCoverage, "Enable Code Coverage");
+			DrawBuildInfo("Enables code coverage. You can use this as a complimentary way of enabling code coverage on platforms that do not support command line arguments.");
+			DrawBuildOption(config, BuildOptions.EnableDeepProfilingSupport, "Enable Deep Profiling Support");
+			DrawBuildInfo("Enables Deep Profiling support in the player.");
 		}
 
 		private void DrawBuildOption(BuildConfig config, BuildOptions option, string label)

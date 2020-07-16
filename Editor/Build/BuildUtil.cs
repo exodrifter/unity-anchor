@@ -16,7 +16,7 @@ namespace Exodrifter.Anchor.Editor
 		/// <returns>The path to the build folder.</returns>
 		public static string GetBuildPath()
 		{
-			var file = "../Build/";
+			var file = "../Builds/";
 			return Path.GetFullPath(Path.Combine(Application.dataPath, file));
 		}
 

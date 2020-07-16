@@ -26,7 +26,7 @@ namespace Exodrifter.Anchor.Editor
 		/// <returns>The path to the build settings file.</returns>
 		public static string GetSettingsPath()
 		{
-			var file = "../ProjectSettings/Indie/BuildSettings.json";
+			var file = "../ProjectSettings/Anchor/BuildSettings.json";
 			return Path.GetFullPath(Path.Combine(Application.dataPath, file));
 		}
 

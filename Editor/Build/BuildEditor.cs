@@ -115,7 +115,7 @@ namespace Exodrifter.Anchor.Editor
 		private void DrawConfig(BuildConfig config)
 		{
 			var targetSupported = BuildUtil.IsTargetSupported(config.target);
-			if (!targetSupported)
+			if (!targetSupported && config.target != 0)
 			{
 				var message = string.Format(
 					"Build module for {0} is not installed!",

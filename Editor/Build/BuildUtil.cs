@@ -132,6 +132,8 @@ namespace Exodrifter.Anchor.Editor
 					return Path.ChangeExtension(exeName, "app");
 				case BuildTarget.StandaloneLinux64:
 					return Path.ChangeExtension(exeName, "x86_64");
+				case BuildTarget.WebGL:
+					return exeName;
 			}
 		}
 

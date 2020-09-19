@@ -102,8 +102,38 @@ namespace Exodrifter.Anchor.Editor
 			{
 				using (var zip = ZipStorer.Create(zipFilename, ""))
 				{
-					zip.AddDirectory(
-						ZipStorer.Compression.Deflate, path, config.folder, "");
+					switch (config.target)
+					{
+						case BuildTarget.WebGL:
+							var directories = Directory.GetDirectories(options.locationPathName);
+							foreach (var directory in directories)
+							{
+								zip.AddDirectory(
+									ZipStorer.Compression.Deflate,
+									directory,
+									Path.GetFileName(directory)
+								);
+							}
+
+							var files = Directory.GetFiles(options.locationPathName);
+							foreach (var file in files)
+							{
+								zip.AddFile(
+									ZipStorer.Compression.Deflate,
+									file,
+									Path.GetFileName(file)
+								);
+							}
+							break;
+
+						default:
+							zip.AddDirectory(
+								ZipStorer.Compression.Deflate,
+								path,
+								PlayerSettings.productName
+							);
+							break;
+					}
 				}
 			}
 			catch (Exception e)

@@ -2,8 +2,10 @@
 using UnityEditor;
 using UnityEngine;
 
-public class Shortcut
+public class Util
 {
+	#region Shortcut
+
 	[MenuItem("Util/Shortcut/Data Path", false, 11)]
 	public static void DataPath()
 	{
@@ -26,5 +28,19 @@ public class Shortcut
 	public static void TemporaryCachePath()
 	{
 		Process.Start("file://" + Application.temporaryCachePath);
+	}
+
+	#endregion
+
+	/// <summary>
+	/// This shortcut should be manually used when the editor version is
+	/// updated, foring all assets to be reserialized to the newest
+	/// serialization format used by the new editor. This will help minimize
+	/// changes in diffs when intentional changes are made.
+	/// </summary>
+	[MenuItem("Util/Force Reserialize", false, 100)]
+	private static void ForceReserialize()
+	{
+		AssetDatabase.ForceReserializeAssets();
 	}
 }

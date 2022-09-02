@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-public class Util
+public class UtilityMenu
 {
 	#region Shortcut
 

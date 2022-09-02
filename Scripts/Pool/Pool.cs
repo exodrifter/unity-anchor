@@ -149,5 +149,18 @@ namespace Exodrifter.Anchor
 				}
 			}
 		}
+
+		public bool Disown(GameObject child)
+		{
+			if (spawned.Contains(child)) {
+				spawned.Remove(child);
+				return true;
+			} else if (pooled.Contains(child)) {
+				pooled.Remove(child);
+				return true;
+			} else {
+				return false;
+			}
+		}
 	}
 }

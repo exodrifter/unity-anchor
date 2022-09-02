@@ -1,0 +1,15 @@
+﻿{
+	"name": "space.exodrifter.unity-anchor",
+	"version": "0.0.0",
+	"description": "exodrifter's personal collection of utility code.",
+	"displayName": "Anchor",
+	"unity": "2020.3",
+	"author": {
+		"name": "exodrifter",
+		"email": "code@exodrifter.space",
+		"url": "https://www.exodrifter.space"
+	},
+	"changelogUrl": "https://github.com/exodrifter/unity-anchor/blob/master/CHANGELOG.md",
+	"documentationUrl": "https://github.com/exodrifter/unity-anchor/wiki",
+	"license": "https://github.com/exodrifter/unity-anchor/blob/master/LICENSE.md"
+}
